@@ -36,3 +36,25 @@ get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
 return (ret);
 }
 
+/**
+ * set_alias - sets alias to string
+ * @info: parameter struct
+ * @str: the string alias
+ *
+ * Return: Always 0 on success, 1 on error
+ */
+int set_alias(info_t *info, char *str)
+{
+char *p;
+
+p = _strchr(str, '=');
+if (!p)
+return (1);
+if (!*++p)
+return (unset_alias(info, str));
+
+unset_alias(info, str);
+return (add_node_end(&(info->alias), str, 0) == NULL);
+}
+
+
